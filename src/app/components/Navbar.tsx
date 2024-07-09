@@ -108,6 +108,7 @@ const Navbar = () => {
                 >
                   {item.children.map((child, index) => (
                     <Link
+                    key={912}
                       onClick={() => setisActive(false)}
                       href={`/${child.path}`}
                     >
@@ -127,7 +128,7 @@ const Navbar = () => {
               </div>
             </li>
           ) : (
-            <Link href={item.path ? `/${item.path}` : ""}>
+            <Link key={123} href={item.path ? `/${item.path}` : ""}>
               <li
                 className="font-bold text-white hover:bg-[#427461] p-4 rounded-md transition-all duration-300 text-xs cursor-pointer"
                 key={index}

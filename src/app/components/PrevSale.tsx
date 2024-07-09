@@ -1,5 +1,5 @@
 "use client";
-import useGetTimeFormated from "@/hooks/useGetTimeFormate";
+import getTimeFormated from "@/hooks/useGetTimeFormate";
 import { useEffect, useState } from "react";
 import ProductTable from "./Products";
 import { FolioI, Product, randomFolios } from "@/data/products";
@@ -10,6 +10,7 @@ import { useWarehouseStore } from "@/store/useWarehouseStore";
 import WarehouseTable from "./Warehouse";
 import { Row } from "@/store/useCompraStore";
 import { PrevSaleI, usePrevSaleStore } from "@/store/usePrevSaleStore";
+import { useRouter } from "next/navigation";
 type handleChange = (
   index: number,
   field: string,
@@ -17,6 +18,7 @@ type handleChange = (
 ) => void;
 
 const PrevCompra = () => {
+  const router = useRouter();
   const [openDialog, setOpenDialog] = useState<Boolean>(false);
   const [providerDialog, setProviderDialog] = useState<boolean>(false);
   const [warehouseDialog, setWarehouseDialog] = useState<boolean>(false);
@@ -139,7 +141,7 @@ const PrevCompra = () => {
       prevCompra: rows,
       provedor: provider,
       almacen: warehouse,
-      fecha: useGetTimeFormated().dayFormated,
+      fecha: getTimeFormated().dayFormated,
       subTotal: SubTotIVG().subTotal,
       ivg: SubTotIVG().ivg,
       total: SubTotIVG().total,
@@ -147,6 +149,7 @@ const PrevCompra = () => {
     };
     setPrevSale(data);
     console.log(data);
+    router.push("/compras");
   };
 
   return (
@@ -181,7 +184,7 @@ const PrevCompra = () => {
           </div>
         </div>
         <div className="flex flex-col gap-5">
-          <p>{useGetTimeFormated().dayFormated}</p>
+          <p>{getTimeFormated().dayFormated}</p>
           <div className="flex gap-2">
             <p>Almacen:</p>
             <input

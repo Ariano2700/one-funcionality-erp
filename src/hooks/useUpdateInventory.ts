@@ -5,7 +5,7 @@ import {
   regularProductsMDC,
 } from "@/data/products"; // Asegúrate de importar correctamente
 import { PurchaseOrderI } from "@/store/usaePurcOrderStore";
-const useUpdateInventory = (ordenCompra: PurchaseOrderI["purchaseOrder"]) => {
+const updateInventory = (ordenCompra: PurchaseOrderI["purchaseOrder"]) => {
   ordenCompra.forEach((item) => {
     const codigoProducto = item.articulo.toString(); // Suponiendo que 'articulo' es el código del producto
     const cantidadComprada = item.cantidad;
@@ -43,4 +43,4 @@ const useUpdateInventory = (ordenCompra: PurchaseOrderI["purchaseOrder"]) => {
   });
 };
 
-export default useUpdateInventory;
+export default updateInventory;

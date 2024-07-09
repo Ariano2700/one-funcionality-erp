@@ -7,7 +7,7 @@ import {
   regularProductsMDC,
   Product,
 } from "@/data/products"; // Ajusta la ruta según tu proyecto
-import useUpdateInventory from "@/hooks/useUpdateInventory";
+import updateInventory from "@/hooks/useUpdateInventory";
 import { usePurchaseOrderStore } from "@/store/usaePurcOrderStore";
 
 const ProductManagementPage = () => {
@@ -17,7 +17,7 @@ const ProductManagementPage = () => {
   const [selectedSupplier, setSelectedSupplier] = useState<string>("");
   useEffect(() => {
     purchaseOrder.forEach((order) => {
-      useUpdateInventory(order.purchaseOrder);
+      updateInventory(order.purchaseOrder);
     });
   }, [purchaseOrder]);
   // Función para filtrar los productos según el término de búsqueda y el proveedor seleccionado

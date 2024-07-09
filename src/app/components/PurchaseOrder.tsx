@@ -1,5 +1,5 @@
 "use client";
-import useGetTimeFormated from "@/hooks/useGetTimeFormate";
+import getTimeFormated from "@/hooks/useGetTimeFormate";
 import { useEffect, useState } from "react";
 import { FolioI, randomFoliosOrden } from "@/data/products";
 import { useProviderStore } from "@/store/useProviderStore";
@@ -13,6 +13,7 @@ import {
 import PrevSaleFolio from "./PrevSaleFolio";
 import { Proveedor } from "./ProvidersTable";
 import { Warehouse } from "./Warehouse";
+import { useRouter } from "next/router";
 type handleChange = (
   index: number,
   field: string,
@@ -20,6 +21,7 @@ type handleChange = (
 ) => void;
 
 const PurchaseOrder = () => {
+  const router = useRouter();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
   const [ordenFolio, setOrdenFolio] = useState<FolioI>();
@@ -27,7 +29,6 @@ const PurchaseOrder = () => {
 
   const [providerState, setProviderState] = useState<Proveedor | null>(null); // Estado para el proveedor seleccionado
   const [warehouseState, setWarehouseState] = useState<Warehouse | null>(null); // Estado para el almacén seleccionado
-
 
   useEffect(() => {
     if (openDialog) {
@@ -97,7 +98,6 @@ const PurchaseOrder = () => {
     setOpenDialog(false); // Cerrar el diálogo
   };
 
-
   const SubTotIVG = () => {
     let subTotal = 0;
     let ivg = 0;
@@ -127,7 +127,7 @@ const PurchaseOrder = () => {
       purchaseOrder: rows,
       provedor: provider,
       almacen: warehouse,
-      fecha: useGetTimeFormated().dayFormated,
+      fecha: getTimeFormated().dayFormated,
       subTotal: SubTotIVG().subTotal,
       ivg: SubTotIVG().ivg,
       total: SubTotIVG().total,
@@ -135,6 +135,7 @@ const PurchaseOrder = () => {
     };
     setPurchaseOrder(data);
     console.log(data);
+    router.push("/inventarios");
   };
 
   return (
@@ -191,7 +192,7 @@ const PurchaseOrder = () => {
           </div>
         </div>
         <div className="flex flex-col gap-5">
-          <p>{useGetTimeFormated().dayFormated}</p>
+          <p>{getTimeFormated().dayFormated}</p>
           <p className="flex gap-3">
             Ref:
             <span className="font-normal">
@@ -249,7 +250,7 @@ const PurchaseOrder = () => {
                     className="bg-transparent w-20"
                     type="text"
                     name="articulo"
-                  /> 
+                  />
                 </td>
                 <td className="px-10 py-2">{row.descripcion}</td>
                 <td className="px-4 py-2">S/{row.costo.toFixed(2)}</td>

@@ -30,7 +30,7 @@ const meses: month[] = [
   { mesNum: 11, mesNombre: "Nov" },
   { mesNum: 12, mesNombre: "Dic" },
 ];
-const useGetTimeFormated = () => {
+const getTimeFormated = () => {
   const dateNow = new Date();
   let day;
   let month;
@@ -46,4 +46,4 @@ const useGetTimeFormated = () => {
   }
   return {dayFormated:`${day}/${month}/${dateNow.getFullYear()}`}
 };
-export default useGetTimeFormated;
+export default getTimeFormated;
